@@ -97,6 +97,7 @@ def scrape():
             for social_media in article_key:
                 num_links = len(article_links[social_media])
                 link_tuple = tuple([max_query_id+1] + [article_links[social_media][x][0] for x in range(0,num_links)] )
+                headline_tuple = tuple([max_query_id+1] + [article_links[social_media][x][1] for x in range(0,num_links)] )
 
                 db.execute('''INSERT INTO {0}(query_id, link1,link2,link3,link4,link5,link6,link7,link8,link9,link10)
                           VALUES(?,?,?,?,?,?,?,?,?,?,?)'''.format(social_media), link_tuple)
@@ -106,17 +107,19 @@ def scrape():
 
                 for article_url in link_tuple[1:]:
                     link_count = link_count + 1
+                    headline_add = headline_tuple[link_tuple.index(article_url)]
                     # print(article_url)
                     # print(str(link_count + max_link_id))
                     # #Get the article text for each article
                     article = article_text(article_url)
                     # print(article)
                     db.execute('''INSERT INTO link(link_id,url,headline,article)
-                              VALUES(?,?,?,?)''', (max_link_id + link_count, article_url, 'place',article))
+                              VALUES(?,?,?,?)''', (max_link_id + link_count, article_url, headline_add,article))
 
     except sqlite3.IntegrityError:
         logging.warning('Record already exists - Integrity error sqlite3')
     finally:
+        print('Completed grab at '+str(query_time))
         logging.warning('Completed grab at '+str(query_time))
         db.commit()
         db.close()
