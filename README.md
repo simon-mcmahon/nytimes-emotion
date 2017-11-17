@@ -19,6 +19,8 @@ It runs in python 3.6.
 
 * Add in live updating graphs. ATM the csv is static in the github repo. The database is still continually updated in the t2.nano instance but needs manual processing and deployment.
 
+* Add in another set of checkboxes in order to allow people to show or hide each set of data.
+
 * make a controller script to streamline the database processing:
   * copy database from ec2
   * run sentiment analysis
