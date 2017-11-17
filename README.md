@@ -19,6 +19,12 @@ It runs in python 3.6.
 
 * Add in live updating graphs. ATM the csv is static in the github repo. The database is still continually updated in the t2.nano instance but needs manual processing and deployment.
 
+* make a controller script to streamline the database processing:
+  * copy database from ec2
+  * run sentiment analysis
+  * output_csv to get csv
+  * push to dev branch of nytimes-emotion
+
 * Adding sentiment analysis functionality for something like the 5 emotions
 
 * Graph smoothing to make the graphs more readable
