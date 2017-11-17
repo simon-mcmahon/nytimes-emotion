@@ -21,6 +21,8 @@ It runs in python 3.6.
 
 * Add in another set of checkboxes in order to allow people to show or hide each set of data.
 
+* Add in a 2-way time shift slider so people can adjut their view to 1 week, 2 weeks etc.
+
 * make a controller script to streamline the database processing:
   * copy database from ec2
   * run sentiment analysis
