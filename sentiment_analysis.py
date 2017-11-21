@@ -2,15 +2,9 @@ from textblob import TextBlob
 
 import sqlite3
 
-testimonial = TextBlob("Textblob is amazingly simple to use. What great fun!")
-
-print(testimonial.sentiment)
-
-print(testimonial.sentiment.polarity)
-
 #Connect to the database and add the sentiment columns if they do not exist
 
-db = sqlite3.connect('nytimes.sqlite')
+db = sqlite3.connect('data/nytimes.sqlite')
 
 cursor = db.cursor()
 
