@@ -5,3 +5,4 @@ venv
 *.sqlite
 example.log
 .idea
+*.backup

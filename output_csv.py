@@ -3,7 +3,7 @@ import datetime
 import sqlite3
 import csv
 
-db = sqlite3.connect('nytimes.sqlite')
+db = sqlite3.connect('data/nytimes.sqlite')
 
 cursor = db.cursor()
 
