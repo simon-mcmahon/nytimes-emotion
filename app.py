@@ -9,7 +9,7 @@ import datetime
 app = dash.Dash(__name__)
 server = app.server
 
-df = pd.read_csv('https://gitcdn.xyz/repo/simon-mcmahon/nytimes-emotion/update/nytimes_dash_output.csv')
+df = pd.read_csv('nytimes_dash_output.csv')
 
 markdown_text_head= '''
 
