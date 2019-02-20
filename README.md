@@ -1,36 +1,43 @@
-# nytimes-emotion
+# [nytimes-emotion](https://nytimes-emotion.herokuapp.com/)
 
-A project intending to take the emotions from the nytime most popular page and display the result of the trending page over time.
+## Status
+
+This project is not being updated due to changed on the NYTimes website which do not make the Top 10 articles by platform available in real time.
+
+## Purpose
+
+A personal coding project which monitored the trending NYTimes article by social media platform at [http://www.nytimes.com/most-popular.html](http://www.nytimes.com/most-popular.html) until it was deprecated in December 2017. The refresh time of the webpage and data was 15 minutes.
+
+The article text and headline were then fed into the [NTLK](http://www.nltk.org/) sentiment analysis engine where values for polarity and subjectivity were calculated.
 
 ## Website
 
 The project is now live on a heroku app which is available to view [here](https://nytimes-emotion.herokuapp.com/).
 
-## Structure
-The script uses beautiful soup and APscheduler to run a call every 15 minutes to extract the 10 top headlines and article text and store it in an sqlite3 database. This database is then modified and parsed through a sentiment analysis machine learning model using Textblob and NLTK. The script is then parsed through the `output_csv.py` script to trim the text down into a reasonably sized `.csv` file for deplymemt on heroku.
+**(Note: The load time for the web app will be around 15-20 seconds on first refresh as it is hosted on heroku's free tier which does not provide 24hr hosting.)**
 
-The webapp side is written in a Dash app built on top of plotly and flask. gunicorn is used for deployment.
+## Design
 
-I have the scaper.py function running on a t2.nano ec2 instance (AWS).
+The `scraper.py` script uses beautiful soup and APscheduler to run a call every 15 minutes to extract the 10 top headlines and article text for each platform (facebook, twitter, email and on website). This is then stored in an sqlite database. 
 
-It runs in python 3.6.
+This database is then parsed through a sentiment analysis machine learning model using [Textblob](https://textblob.readthedocs.io/en/dev/) and [NTLK](http://www.nltk.org/). The database is then parsed through the `output_csv.py` script to output a reasonably sized `.csv` file for deplymemt as a webapp heroku.
 
-## To do
+The webapp side is written in [Dash by Plotly](https://dash.plot.ly/) (built on top of flask). [Gunicorn](https://gunicorn.org/) is used for deployment of the app to [Heroku](https://www.heroku.com/).
 
-* Add in live updating graphs. ATM the csv is static in the github repo. The database is still continually updated in the t2.nano instance but needs manual processing and deployment.
+The `scraper.py` function runs on a t2.nano ec2 instance (AWS).
 
-* Add in another set of checkboxes in order to allow people to show or hide each set of data.
+It was built on python 3.6 but should run in python 3.X. This has not been tested.
 
-* Add in a 2-way time shift slider so people can adjut their view to 1 week, 2 weeks etc.
+## Installation instructions
 
-* make a controller script to streamline the database processing:
-  * copy database from ec2
-  * run sentiment analysis
-  * output_csv to get csv
-  * push to dev branch of nytimes-emotion
+Clone this repository:
 
-* Adding sentiment analysis functionality for something like the 5 emotions
+`git clone https://github.com/simon-mcmahon/nytimes-emotion`
 
-* Graph smoothing to make the graphs more readable
+Install the dependencies:
 
-* CSS sheet design to make the app more mobile friendly and wide monitor friendly
+`pip install -r requirements.txt`
+
+Setting up automatic deployment with Gunicorn and Heroku:
+
+[Tutorial](https://github.com/datademofun/heroku-basic-flask)
