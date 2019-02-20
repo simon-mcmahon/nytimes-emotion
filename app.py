@@ -113,7 +113,7 @@ app.layout = html.Div([
         id='time-slider',
         min=1,
         max=5,
-        value=5,
+        value=1,
         step=None,
         marks={5:'1 day', 4:'3 days', 3:'1 week', 2:'2 weeks', 1:'1 month'}
     ),
